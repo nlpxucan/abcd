@@ -12,6 +12,23 @@ from sympy.parsing.latex import parse_latex
 
 
 def is_digit(s):
+    """
+    Checks if the input can be converted to a float.
+
+    Parameters
+    ----------
+    s : any
+        The input to check.
+
+    Returns
+    -------
+    bool
+        True if the input can be converted to a float, False otherwise.
+
+    Raises
+    ------
+    None
+    """
     try:
         float(str(s).replace(",", ""))
         return True
@@ -25,9 +42,37 @@ def math_equal(prediction: Union[bool, float, str],
                 timeout: bool = False,
                 ) -> bool:
     """
+    Determines if two math expressions are equal.
+
     Exact match of math if and only if:
     1. numerical equal: both can convert to float and are equal
     2. symbolic equal: both can convert to sympy expression and are equal
+
+    Parameters
+    ----------
+    prediction : Union[bool, float, str]
+        The predicted value.
+
+    reference : Union[float, str]
+        The reference value.
+
+    include_percentage : bool, optional
+        Whether to include percentage variations, by default True.
+
+    is_close : bool, optional
+        Whether to consider close match using relative tolerance, by default True.
+
+    timeout : bool, optional
+        Whether to apply timeout to the symbolic equal check, by default False.
+
+    Returns
+    -------
+    bool
+        True if the values are equal, False otherwise.
+
+    Raises
+    ------
+    None
     """
     try: # 1. numerical equal
         if is_digit(prediction) and is_digit(reference):
@@ -92,10 +137,47 @@ def math_equal(prediction: Union[bool, float, str],
 
 
 def math_equal_process(param):
+    """
+    Calls `math_equal` function with the provided parameters.
+
+    Parameters
+    ----------
+    param : tuple
+        Tuple containing parameters for `math_equal` function.
+
+    Returns
+    -------
+    bool
+        True if the values are equal, False otherwise.
+
+    Raises
+    ------
+    None
+    """
     return math_equal(param[-2], param[-1])
 
 
 def symbolic_equal(a, b):
+    """
+    Checks if two expressions are symbolically equal using sympy.
+
+    Parameters
+    ----------
+    a : str
+        First expression.
+
+    b : str
+        Second expression.
+
+    Returns
+    -------
+    bool
+        True if the expressions are equal, False otherwise.
+
+    Raises
+    ------
+    None
+    """
     def _parse(s):
         for f in [parse_latex, parse_expr]:
             try:
@@ -120,12 +202,60 @@ def symbolic_equal(a, b):
     return False
 
 
-def symbolic_equal_process(a, b, output_queue):  
+def symbolic_equal_process(a, b, output_queue):
+    """
+    Checks if two expressions are symbolically equal using sympy.
+
+    Parameters
+    ----------
+    a : str
+        First expression.
+
+    b : str
+        Second expression.
+
+    output_queue : multiprocessing.Queue
+        Queue to store the result.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    None
+    """
     result = symbolic_equal(a, b)
     output_queue.put(result)  
 
 
-def call_with_timeout(func, *args, timeout=1, **kwargs):  
+def call_with_timeout(func, *args, timeout=1, **kwargs):
+    """
+    Calls a function with a specified timeout.
+
+    Parameters
+    ----------
+    func : function
+        The function to call.
+
+    timeout : int, optional
+        Timeout value in seconds, by default 1.
+
+    *args : list
+        Positional arguments for the function.
+        
+    **kwargs : dict
+        Keyword arguments for the function.
+
+    Returns
+    -------
+    bool
+        True if the function call succeeds within the timeout, False otherwise.
+
+    Raises
+    ------
+    None
+    """ 
     output_queue = multiprocessing.Queue()  
     process_args = args + (output_queue,)  
     process = multiprocessing.Process(target=func, args=process_args, kwargs=kwargs)  

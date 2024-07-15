@@ -8,6 +8,19 @@ The #Created Prompt# must be reasonable and must be understood and responded by 
 
 
 def createBreadthPrompt(instruction):
+	"""
+	Creates a breadth prompt by combining a base instruction with a given instruction.
+
+	Parameters
+	----------
+	instruction : str
+		The given instruction to be included in the prompt.
+
+	Returns
+	-------
+	prompt : str
+		The created breadth prompt.
+	"""
 	prompt = base_instruction
 	prompt += "#Given Prompt#: \r\n {} \r\n".format(instruction)
 	prompt += "#Created Prompt#:\r\n"
