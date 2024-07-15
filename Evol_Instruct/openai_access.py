@@ -1,13 +1,14 @@
 import openai
 import time
+import requests
 
-openai.api_key = 'your api key'
-
+client = openai.OpenAI(
+    api_key = 'your api key')
 
 def get_oai_completion(prompt):
 
     try: 
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
         {"role": "system", "content": "You are a helpful assistant."},
@@ -21,19 +22,17 @@ def get_oai_completion(prompt):
    presence_penalty=0,
    stop=None
 )
-        res = response["choices"][0]["message"]["content"]
-       
-        gpt_output = res
-        return gpt_output
+        res = response.model_dump(mode='python')['choices'][0]['message']['content']
+        return res
     except requests.exceptions.Timeout:
         # Handle the timeout error here
         print("The OpenAI API request timed out. Please try again later.")
         return None
-    except openai.error.InvalidRequestError as e:
+    except openai.BadRequestError as e:
         # Handle the invalid request error here
         print(f"The OpenAI API request was invalid: {e}")
         return None
-    except openai.error.APIError as e:
+    except openai.APIError as e:
         if "The operation was timeout" in str(e):
             # Handle the timeout error here
             print("The OpenAI API request timed out. Please try again later.")
@@ -43,7 +42,7 @@ def get_oai_completion(prompt):
             # Handle other API errors here
             print(f"The OpenAI API returned an error: {e}")
             return None
-    except openai.error.RateLimitError as e:
+    except openai.RateLimitError as e:
         return get_oai_completion(prompt)
 
 def call_chatgpt(ins):
