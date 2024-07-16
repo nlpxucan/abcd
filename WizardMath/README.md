@@ -214,7 +214,7 @@ Recently, there have been clear changes in the open-source policy and regulation
 
 <h2 id="inference">Inference</h2>
 
-We provide the decoding script for WizardMath, which reads a input file and generates corresponding responses for each sample, and finally calculate the score.
+We provide the decoding script for WizardMath, which reads an input file and generates corresponding responses for each sample, and finally calculate the score.
 
 ###  Install inference environment :
 Note: We used vllm for inference which can speed up inference and save time. Please refer to the official github [vllm](https://github.com/vllm-project/vllm/tree/main) for questions about vllm installation.

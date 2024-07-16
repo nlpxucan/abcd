@@ -73,7 +73,7 @@ def gsm8k_test(model, data_path, start=0, end=MAX_INT, batch_size=1, tensor_para
         "Write a response that appropriately completes the request.\n\n"
         "### Instruction:\n{instruction}\n\n### Response: Let's think step by step."
     )
-    print('promt =====', problem_prompt)
+    print('prompt =====', problem_prompt)
     with open(data_path,"r+", encoding="utf8") as f:
         for idx, item in enumerate(jsonlines.Reader(f)):
             temp_instr = problem_prompt.format(instruction=item["question"])
@@ -84,12 +84,12 @@ def gsm8k_test(model, data_path, start=0, end=MAX_INT, batch_size=1, tensor_para
 
     gsm8k_ins = gsm8k_ins[start:end]
     gsm8k_answers = gsm8k_answers[start:end]
-    print('lenght ====', len(gsm8k_ins))
+    print('length ====', len(gsm8k_ins))
     batch_gsm8k_ins = batch_data(gsm8k_ins, batch_size=batch_size)
 
     stop_tokens = ["Instruction:", "Instruction", "Response:", "Response"]
     sampling_params = SamplingParams(temperature=0, top_p=1, max_tokens=1024, stop=stop_tokens)
-    print('sampleing =====', sampling_params)
+    print('sampling =====', sampling_params)
     llm = LLM(model=model,tensor_parallel_size=tensor_parallel_size)
     result = []
     res_completions = []

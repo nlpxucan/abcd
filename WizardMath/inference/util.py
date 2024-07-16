@@ -75,7 +75,7 @@ def _clean_numbers(string):
     num_prev_digits = 0
     new_string = ""
     for i, c in enumerate(string):
-        # isdigit() doesnt work here because of weird unicode chars.
+        # isdigit() doesn't work here because of weird unicode chars.
         if c in {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}:
             num_prev_digits += 1
         else:

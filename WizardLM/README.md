@@ -89,7 +89,7 @@ The following table provides a comprehensive comparison of WizardLMs and several
 | WizardLM-30B  1.0   | **37.8**         |
 
 ## Call for Feedbacks
-We welcome everyone to use your professional and difficult instructions to evaluate WizardLM, and show us examples of poor performance and your suggestions in the [issue discussion](https://github.com/nlpxucan/WizardLM/issues) area. We are focusing on improving the Evol-Instruct now and hope to relieve existing weaknesses and issues in the the next version of WizardLM. After that, we will open the code and pipeline of up-to-date Evol-Instruct algorithm and work with you together to improve it.
+We welcome everyone to use your professional and difficult instructions to evaluate WizardLM, and show us examples of poor performance and your suggestions in the [issue discussion](https://github.com/nlpxucan/WizardLM/issues) area. We are focusing on improving the Evol-Instruct now and hope to relieve existing weaknesses and issues in the next version of WizardLM. After that, we will open the code and pipeline of up-to-date Evol-Instruct algorithm and work with you together to improve it.
 
 ## Unofficial Video Introductions
 Thanks to the enthusiastic friends, their video introductions are more lively and interesting.
@@ -202,7 +202,7 @@ See [Distributed Fine-tuning](./doc/distributed_finetune.md)
 
 **NOTE:** The **WizardLM-13B-1.0** and **Wizard-7B** use different prompt at the beginning of the conversation!
 
-We provide the decoding script for WizardLM, which reads a input file and generates corresponding responses for each sample, and finally consolidates them into an output file.
+We provide the decoding script for WizardLM, which reads an input file and generates corresponding responses for each sample, and finally consolidates them into an output file.
 
 You can specify `base_model`, `input_data_path` and `output_data_path` in src\inference_wizardlm.py or src\infer_wizardlm13b.py to set the decoding model, path of input file and path of output file.
 

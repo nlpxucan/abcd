@@ -59,7 +59,7 @@ def test_hendrycks_math(model, data_path, start=0, end=MAX_INT, batch_size=1, te
         "Write a response that appropriately completes the request.\n\n"
         "### Instruction:\n{instruction}\n\n### Response: Let's think step by step."
     )
-    print('promt =====', problem_prompt)
+    print('prompt =====', problem_prompt)
     with open(data_path, "r+", encoding="utf8") as f:
         for idx, item in enumerate(jsonlines.Reader(f)):
             temp_instr = problem_prompt.format(instruction=item["instruction"])
@@ -71,12 +71,12 @@ def test_hendrycks_math(model, data_path, start=0, end=MAX_INT, batch_size=1, te
     print('total length ===', len(hendrycks_math_ins))
     hendrycks_math_ins = hendrycks_math_ins[start:end]
     hendrycks_math_answers = hendrycks_math_answers[start:end]
-    print('lenght ====', len(hendrycks_math_ins))
+    print('length ====', len(hendrycks_math_ins))
     batch_hendrycks_math_ins = batch_data(hendrycks_math_ins, batch_size=batch_size)
 
     stop_tokens = ["Instruction:", "Instruction", "Response:", "Response"]
     sampling_params = SamplingParams(temperature=0, top_p=1, max_tokens=2048, stop=stop_tokens)
-    print('sampleing =====', sampling_params)
+    print('sampling =====', sampling_params)
     llm = LLM(model=model,tensor_parallel_size=tensor_parallel_size)
     res_completions = []
     for idx, (prompt, prompt_answer) in enumerate(zip(batch_hendrycks_math_ins, hendrycks_math_answers)):

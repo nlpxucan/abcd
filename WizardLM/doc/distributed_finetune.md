@@ -3,9 +3,9 @@ We've conducted distributed fine tune experiment on our WizardLM utilizing origi
 To reproduce our experiments, we provided the steps and system configuration here.
 
 ## Steps
-We assume you have worker-0, worker-1, worker-2 which are GPU nodes to be used for training and they could ssh into each other via private key. We assume worker-0 is the master node here, which has a opened port MASTER_PORT that worker-1 and worker-2 can directly access and it has a MASTER_IP that other nodes can access.
+We assume you have worker-0, worker-1, worker-2 which are GPU nodes to be used for training and they could ssh into each other via private key. We assume worker-0 is the master node here, which has an opened port MASTER_PORT that worker-1 and worker-2 can directly access and it has a MASTER_IP that other nodes can access.
 
-In each worker, configure your enviorment using the instructions in Llama-X. Different workers should use the same absolute path in your data, output, code folder and they should be exactly the same configuration.
+In each worker, configure your environment using the instructions in Llama-X. Different workers should use the same absolute path in your data, output, code folder and they should be exactly the same configuration.
 
 After that, we need to change the hostfile config(*/path/to/Llama-X/src/configs/hostfile*) in each node, and add each worker into it, assuming 8 GPUs on each worker:
 ```bash
@@ -14,7 +14,7 @@ worker-1 slots=8
 worker-2 slots=8
 ```
 
-And since there might be some NCCL commuication problem considering the complexity of every cluster, we recommend use this config:
+And since there might be some NCCL communication problem considering the complexity of every cluster, we recommend use this config:
 ```bash
 NCCL_DEBUG=INFO
 NCCL_ASYNC_ERROR_HANDLING=1
@@ -71,4 +71,4 @@ NCCL_ASYNC_ERROR_HANDLING=1
 NCCL_IB_DISABLE=1
 NCCL_SOCKET_IFNAME=ens9f1
 ```
-NCCL_SOCKET_IFNAME needs to be changed to your worker's actual newtwork interface name, using *ifconfig* to find out.
+NCCL_SOCKET_IFNAME needs to be changed to your worker's actual network interface name, using *ifconfig* to find out.

@@ -125,7 +125,7 @@ Please cite the paper if you refer to our model or code or data or paper from Wi
 ```
 
 
-❗To commen concern about dataset:
+❗To common concern about dataset:
 
 Recently, there have been clear changes in the open-source policy and regulations of our overall organization's code, data, and models.
 Despite this, we have still worked hard to obtain opening the weights of the model first, but the data involves stricter auditing and is in review with our legal team .
@@ -222,7 +222,7 @@ The following table provides a comprehensive comparison of WizardLMs and several
 | WizardCoder-15B  1.0 | **57.3**     |
 
 ## Call for Feedbacks
-We welcome everyone to use your professional and difficult instructions to evaluate WizardLM, and show us examples of poor performance and your suggestions in the [issue discussion](https://github.com/nlpxucan/WizardLM/issues) area. We are focusing on improving the Evol-Instruct now and hope to relieve existing weaknesses and issues in the the next version of WizardLM. After that, we will open the code and pipeline of up-to-date Evol-Instruct algorithm and work with you together to improve it.
+We welcome everyone to use your professional and difficult instructions to evaluate WizardLM, and show us examples of poor performance and your suggestions in the [issue discussion](https://github.com/nlpxucan/WizardLM/issues) area. We are focusing on improving the Evol-Instruct now and hope to relieve existing weaknesses and issues in the next version of WizardLM. After that, we will open the code and pipeline of up-to-date Evol-Instruct algorithm and work with you together to improve it.
 
 
 
