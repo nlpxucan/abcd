@@ -245,7 +245,7 @@ def is_equiv(str1, str2, verbose=False):
         return res
     except Exception:
         #return str1 == str2
-        res = math_equal(str1,str1) or str1 == str2
+        res = math_equal(str1,str2) or str1 == str2
         return res
 
 class NotEqual:
