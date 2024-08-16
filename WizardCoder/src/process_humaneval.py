@@ -51,7 +51,7 @@ for code_file in tqdm(files, total=len(files)):
                     print("================\n")
                 # print(completion)
             if "__name__ == \"__main__\"" in completion:
-                next_line = completion.index('if __name__ == "__main__":')
+                next_line = completion.index('__name__ == "__main__"')
                 completion = completion[:next_line].strip()
                 # print(completion)
             
